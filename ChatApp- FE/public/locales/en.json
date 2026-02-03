@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "Hello world!"
+  },
+  "Home": {
+    "home": "Hello Home Component EN"
+  },
+   "LocaleSwitcher": {
+    "label": "Change Language",
+    "locale": "{locale, select, tr {TR} en {EN} other {Tanımsız}}"
+  }
+}

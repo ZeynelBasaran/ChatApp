@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "Merhaba"
+  },
+   "Home": {
+    "home": "Merhaba Server Component TR"
+  },
+   "LocaleSwitcher": {
+    "label": "Dil Degiştir",
+    "locale": "{locale, select, tr {TR} en {EN} other {Tanımsız}}"
+  }
+}
