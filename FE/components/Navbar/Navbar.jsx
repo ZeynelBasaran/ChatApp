@@ -1,6 +1,6 @@
 
 import LocaleSwitcher from './LocaleSwitcher.jsx';
-import ToggleTheme from './ToggleTheme'
+import ToggleTheme from './ToggleTheme.jsx'
 
 
 const Navbar = () => {
