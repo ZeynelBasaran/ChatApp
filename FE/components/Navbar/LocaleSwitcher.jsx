@@ -9,8 +9,6 @@ export default function LocaleSwitcher() {
   const locale = useLocale();
 
 
-  console.log(locale)
-
   return (
     <LocaleSwitcherSelect defaultValue={locale} label={t('label')}>
       {routing.locales.map((cur) => (

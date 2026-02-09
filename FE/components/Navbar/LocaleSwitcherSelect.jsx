@@ -30,6 +30,8 @@ export default function LocaleSwitcherSelect({
     });
   }
 
+
+
   return (
     <label
       className={
