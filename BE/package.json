@@ -7,7 +7,6 @@
     "start": "node server.js",
     "dev": "nodemon node server.js"
   },
- 
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,6 +18,7 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.6",
-    "nodemon": "^3.1.11"
+    "nodemon": "^3.1.11",
+    "resend": "^6.9.1"
   }
 }
