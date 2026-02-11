@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import { generateToken, isValidEmail } from "../lib/utils.js";
 import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 import { ENV } from "../lib/env.js";
+import cloudinary from "../lib/cloudınary.js";
+
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
@@ -113,6 +115,29 @@ export const logout = (_, res) => {
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.error("Error in logout controller:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+export const updateProfile = async (req, res) => {
+  try {
+    const { profilePic } = req.body;
+    if (!profilePic) return res.status(400).json({ message: "Profile pic is required" });
+
+    const userId = req.user._id;
+
+    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { profilePic: uploadResponse.secure_url },
+      { new: true }
+    ).select("-password");
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.log("Error in update profile:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

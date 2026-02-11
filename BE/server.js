@@ -1,15 +1,17 @@
 import express from "express";
-import dotenv from "dotenv";
 import authRoutes from "./src/routes/auth.js";
 import messageRoutes from "./src/routes/message.js";
 import { connectDB } from "./src/lib/db.js";
 import { ENV } from "./src/lib/env.js";
-import { sender } from "./src/lib/resend.js";
+import cookieParser from "cookie-parser";
+
 
 
 const app = express();
 
 app.use(express.json())
+app.use(cookieParser());
+
 
 const PORT = ENV.PORT || 5173;
 
