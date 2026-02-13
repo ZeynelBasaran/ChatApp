@@ -6,6 +6,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -61,6 +62,7 @@ export default async function RootLayout({ children, params }) {
             <ThemeProvider attribute="class" defaultTheme="system">
               <Navbar />
               {children}
+              <Footer />
             </ThemeProvider>
           </QueryProvider>
         </NextIntlClientProvider>

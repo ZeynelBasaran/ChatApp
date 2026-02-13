@@ -39,6 +39,14 @@ app.use(cookieParser());
 // Define server port from environment variables or default to 5173
 const PORT = ENV.PORT || 5173;
 
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: "API running 🚀",
+  });
+});
+
 // Apply specific rate limiter to authentication routes
 app.use("/api/auth", authLimiter, authRoutes);
 

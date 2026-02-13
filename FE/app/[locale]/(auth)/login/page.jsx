@@ -2,7 +2,7 @@ import React from 'react'
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <div className='w-full max-w-360 flex-1'>Login</div>
   )
 }
 
