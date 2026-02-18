@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//Production or dev mode 
+//Production or dev mode
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || process.env.API_URL;
 
@@ -8,10 +8,12 @@ if (!API_BASE_URL) {
   throw new Error("API_BASE_URL is not defined");
 }
 
-
 // Endpointler
 export const API_ENDPOINTS = {
-  RECIPES: "/recipes",
+  LOGIN: "/auth/login",
+  LOGOUT: "/auth/logout",
+  REGISTER: "/auth/register",
+  REFRESH_TOKEN: "/auth/refresh-token",
 };
 
 // 2. Özel Axios Örneğini Oluştur
@@ -20,72 +22,43 @@ const apiFactory = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 10000, // İstek zaman aşımı (10 saniye)
+  timeout: 10000,
+  withCredentials: true,
 });
 
-// 3. İstek Interceptor'ı (Token Ekleme Mekanizması)
 apiFactory.interceptors.request.use(
   (config) => {
-    // --- Token'ı Alma Mantığı ---
-    let token = null;
-
-    // Client-side (tarayıcı) ortamında
-    if (typeof window !== "undefined") {
-      token = localStorage.getItem("authToken");
-    }
-    // Server-side için token config'den geliyorsa kullan
-    // Server component'lerde token'ı config ile geçirebilirsiniz
-    if (config.token) {
-      token = config.token;
-    }
-
-    if (token) {
-      // Authorization başlığına token'ı ekle
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
-    // Config'den token'ı temizle (axios'a göndermemek için)
-    delete config.token;
-
-    console.log("Request URL:", config.baseURL + config.url);
-
+    process.env.NODE_ENV === "development" &&
+      console.log("Outgoing Request:", config.baseURL + config.url)
 
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 
 // 4. Yanıt Interceptor'ı (Hata Yönetimi)
 apiFactory.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   async (error) => {
-    // 401 (Yetkisiz) hatası durumunda yönlendirme
+    /*
     if (error.response?.status === 401) {
       if (typeof window !== "undefined") {
-        // Token'ı temizle
-        localStorage.removeItem("authToken");
-        // Login sayfasına yönlendir (isteğe bağlı)
-        // window.location.href = '/login';
-      }
+        window.location.href = "/login";
+      }p
     }
 
-    // 403 (Yasak) hatası
+    */
+
     if (error.response?.status === 403) {
       console.error(
         "Forbidden: You don't have permission to access this resource",
       );
     }
 
-    // 404 (Bulunamadı) hatası
     if (error.response?.status === 404) {
       console.error("Not Found: The requested resource was not found");
     }
 
-    // 500 (Sunucu Hatası) hatası
     if (error.response?.status >= 500) {
       console.error("Server Error: Internal server error");
     }

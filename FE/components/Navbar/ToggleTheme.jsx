@@ -40,7 +40,7 @@ const ModeToggle = () => {
   if (!mounted) {
     return (
       <div className="w-[41px] h-[41px] border border-gray-300 rounded-lg flex flex-col justify-center items-center p-1">
-        <div className="w-[25px] h-[25px]"></div>
+        <div className="w-[25px] h-[25px] "></div>
       </div>
     )
   }

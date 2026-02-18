@@ -5,7 +5,6 @@ import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 import { ENV } from "../lib/env.js";
 import cloudinary from "../lib/cloudınary.js";
 
-
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
 
@@ -31,7 +30,7 @@ export const signup = async (req, res) => {
         .json({ success: false, message: "Invalid email format" });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
     if (user)
       return res.status(400).json({
         success: false,
@@ -43,7 +42,7 @@ export const signup = async (req, res) => {
 
     const newUser = new User({
       fullName,
-      email,
+      email: normalizedEmail,
       password: hashedPassword,
     });
 
@@ -85,11 +84,12 @@ export const login = async (req, res) => {
 
   try {
     const user = await User.findOne({ email: email.toLowerCase().trim() });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
     if (!isPasswordCorrect)
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials" });
 
     generateToken(user._id, res);
 
@@ -119,11 +119,11 @@ export const logout = (_, res) => {
   }
 };
 
-
 export const updateProfile = async (req, res) => {
   try {
     const { profilePic } = req.body;
-    if (!profilePic) return res.status(400).json({ message: "Profile pic is required" });
+    if (!profilePic)
+      return res.status(400).json({ message: "Profile pic is required" });
 
     const userId = req.user._id;
 
@@ -132,7 +132,7 @@ export const updateProfile = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profilePic: uploadResponse.secure_url },
-      { new: true }
+      { new: true },
     ).select("-password");
 
     res.status(200).json(updatedUser);

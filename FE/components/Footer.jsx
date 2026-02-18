@@ -3,7 +3,7 @@ import { Linkedin,Github } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="p-4 bg-base-200 border-t border-base-content/10 w-full max-w-360">
+    <footer className="p-4  border-t border-base-content/10 w-full max-w-360 text-white ">
       <div className="container mx-auto ">
 
         <div className="md:flex md:justify-between mb-4">

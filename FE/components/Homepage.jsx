@@ -1,36 +1,40 @@
-import React from 'react'
+import React from "react";
+import Link from "next/link";
 
 export default function ChatLandingPage() {
   return (
-    <div className=" bg-white text-gray-900 flex flex-col">
-      <main className="flex-1 flex flex-col items-center justify-center text-center px-6">
-        
-        <h1 className="text-5xl md:text-6xl font-semibold tracking-tight leading-tight max-w-3xl">
-          Mesajlaşmanın
-          <br />
-          en sade hali.
-        </h1>
+    <main className="flex-1 flex flex-col items-center h-full justify-center text-center px-6   relative overflow-hidden max-w-360 mx-auto">
+      <div className="mt-12 px-4 py-1.5 mb-6 rounded-full bg-gray-50 border border-gray-100 text-[14px] font-bold text-gray-500 tracking-wide uppercase">
+        Simple • Secure • Fast
+      </div>
 
-        <p className="mt-6 text-lg text-gray-500 max-w-xl">
-          Hızlı, güvenli ve dikkat dağıtmayan bir sohbet deneyimi.
-          Sadece konuşmaya odaklan.
-        </p>
+      <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl text-white bg-clip-text ">
+        Messaging in its
+        <br />
+        purest form.
+      </h1>
 
-        <div className="mt-10 flex gap-5">
-          <button className="px-8 py-3 bg-black text-white rounded-full text-sm font-medium hover:opacity-90 transition">
-            Hemen Başla
-          </button>
+      <p className="mt-8 text-xl text-white max-w-lg leading-relaxed">
+        Experience a chat environment designed for clarity. No distractions,
+        just meaningful conversations.
+      </p>
 
-          <button className="px-8 py-3 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 transition">
-            Daha Fazla
-          </button>
-        </div>
+      <div className="mt-12 flex flex-col sm:flex-row gap-4 items-center z-10 max-h-14">
+        <Link
+          href="/signup"
+          className="w-full sm:w-auto px-10 py-4 border border-white bg-purple-900 text-white rounded-full text-[15px] font-semibold  shadow-lg  transition-all duration-300 active:scale-95 text-center hover:text-black hover:border-primary hover:bg-white"
+        >
+          Sign Up
+        </Link>
 
-      </main>
+        <Link
+          href="/login"
+          className="w-full sm:w-auto px-10 py-4 border border-black border-dark text-black rounded-full text-[15px] font-semibold bg-indigo-200 transition-all duration-300 active:scale-95 text-center hover:text-white  hover:bg-indigo-300 shadow-lg"
+        >
+          Login
+        </Link>
+      </div>
 
-     
-    </div>
+    </main>
   );
 }
-
-

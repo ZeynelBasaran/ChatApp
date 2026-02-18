@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer";
+import { Toaster } from 'sonner';
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -56,13 +57,14 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${outfit.variable}  antialiased`}>
+      <body className={`${outfit.variable}  antialiased border-base-content/10 bg-[linear-gradient(to_right,#1E293B_0%,#1E293B_10%,#3B0764_50%,#1E293B_90%,#1E293B_100%)] `}>
         <NextIntlClientProvider>
           <QueryProvider>
             <ThemeProvider attribute="class" defaultTheme="system">
               <Navbar />
               {children}
               <Footer />
+              <Toaster position="top-right" richColors closeButton />
             </ThemeProvider>
           </QueryProvider>
         </NextIntlClientProvider>
