@@ -1,11 +1,9 @@
 'use client';
 
 import {useParams} from 'next/navigation';
-import { useTransition} from 'react';
+import { useTransition } from 'react';
 import {usePathname, useRouter} from '../../i18n/navigation';
-import Image from 'next/image';
-
-
+import { ChevronDown } from 'lucide-react';
 
 export default function LocaleSwitcherSelect({
   children,
@@ -18,7 +16,7 @@ export default function LocaleSwitcherSelect({
   const params = useParams();
 
   function onSelectChange(event) {
-    const nextLocale = event.target.value ;
+    const nextLocale = event.target.value;
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
@@ -30,18 +28,19 @@ export default function LocaleSwitcherSelect({
     });
   }
 
-
-
   return (
     <label
-      className={
-        `relative text-gray-400     flex justify-center itens-center ${isPending ? 'opacity-50 pointer-events-none' : ''}`
-        
-      }
+      className={`relative flex justify-center items-center ${isPending ? 'opacity-50 pointer-events-none' : ''}`}
     >
-      <p className="sr-only text-yellow-300">{label}</p>
+      <p className="sr-only">{label}</p>
+      
+      {/* 
+         - text-color-primary: Light modda Koyu, Dark modda Açık renk olur.
+         - border-color-primary: Light modda Koyu, Dark modda Açık renk olur.
+         - bg-transparent: Arka plan rengine uyum sağlar.
+      */}
       <select
-        className="inline-flex appearance-none bg-transparent pl-1 text-white border border-white w-[50px] h-[35px] rounded-lg"
+        className="inline-flex appearance-none bg-transparent pl-2 text-color-primary border border-color-primary w-[55px] h-[35px] rounded-lg cursor-pointer focus:outline-none font-medium"
         defaultValue={defaultValue}
         disabled={isPending}
         onChange={onSelectChange}
@@ -49,7 +48,10 @@ export default function LocaleSwitcherSelect({
         {children}
       </select>
 
-      <Image src="/svg/arrow.svg" alt="" width="16" height="16" className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+      <ChevronDown 
+        className="absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none text-color-primary" 
+        size={16} 
+      />
       
     </label>
   );

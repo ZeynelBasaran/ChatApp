@@ -3,27 +3,65 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
+/* 
+  LIGHT MODE (Default)
+  -------------------
+  Clean, readable, and soft color palette.
+*/
+:root {
+    /* Text / Primary Icon Color: Pure Black */
+    --color-primary: #000000; 
 
-    /*Text Color*/
-    --color-primary: #BFBDC1;
-    --color-secondary:  #36151E;
-    --color-three:  #593F62;
-    --color-fourth:  #EE4266;
-    --color-five:  #5887FF;
+    /* Secondary (Container Backgrounds): Soft Gray/White smoke */
+    --color-secondary: #F3F4F6; 
 
-    /*Background Color*/
+    /* Third Color (Alternative Containers): Light Gray */
+    --color-three: #E5E7EB;
+
+    /* Account/Action (Pink): Kept vibrant */
+    --color-fourth: #EE4266;
+
+    /* Action (Blue): Kept vibrant */
+    --color-five: #5887FF;
+
+    /* Main Background: Pure White / Off-White */
+    --bg-primary: #FFFFFF;
+    
+    /* Background Image (Gradient): None for Light Mode */
+    --bg-image: none;
+}
+
+/* 
+  DARK MODE
+  -------------------
+  Original dark theme colors preserved.
+*/
+.dark {
+    --color-primary: #FFFFFF;
+    --color-secondary: #36151E;
+    --color-three: #593F62;
+    --color-fourth: #EE4266;
+    --color-five: #5887FF;
     --bg-primary: #1E1E1E;
 
+    /* Custom Gradient: Siyah yanlar, Mor orta */
+    --bg-image: linear-gradient(to right, #1E293B 0%, #1E293B 10%, #3B0764 50%, #1E293B 90%, #1E293B 100%);
+}
 
-    /*Fonts*/
+@theme {
+    /* Linking Tailwind classes to dynamic CSS variables */
+    --color-primary: var(--color-primary);
+    --color-secondary: var(--color-secondary);
+    --color-three: var(--color-three);
+    --color-fourth: var(--color-fourth);
+    --color-five: var(--color-five);
+    --bg-primary: var(--bg-primary);
+
+    /* Fonts */
     --font-outfit: 'Outfit', sans-serif;
-   
 
-    /*Breakpoints*/
+    /* Breakpoints */
     --breakpoint-screen12: 1200px;
-
-
 }
 
 body {
@@ -33,8 +71,16 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'Times New Roman', Times, serif;
+    
+    /* Using the Outfit font variable defined in theme */
+    font-family: var(--font-outfit), sans-serif;
+    
+    /* Dynamic background and text color based on theme */
+    background-color: var(--bg-primary);
+    background-image: var(--bg-image);
+    color: var(--color-primary);
 }
+
 ::-webkit-scrollbar{
     display: none;
 }

@@ -35,7 +35,7 @@ app.set("trust proxy", 1);
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://chatapp-o78m.onrender.com",
+  "https://chatappzb.netlify.app",
 ];
 
 const corsOptions = {

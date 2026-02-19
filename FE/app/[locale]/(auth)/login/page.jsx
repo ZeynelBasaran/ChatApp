@@ -28,28 +28,28 @@ function LoginPage() {
   };
 
   return (
-    <div className="w-full flex-1 items-center justify-center text-white max-w-360">
+    <div className="w-full flex-1 items-center justify-center text-color-primary max-w-360 lg:px-20 md:px-8 px-4">
       <div className="relative w-full max-w-6xl">
         <div className="w-full flex flex-col md:flex-row">
           <div className="md:w-1/2 p-8 flex items-center justify-center ">
             <div className="w-full max-w-md">
               <div className="text-center mb-8">
-                <MessageCircleIcon className="w-12 h-12 mx-auto text-white mb-4" />
-                <h2 className="text-2xl font-bold text-white mb-2">
+                <MessageCircleIcon className="w-12 h-12 mx-auto text-color-primary mb-4" />
+                <h2 className="text-2xl font-bold text-color-primary mb-2">
                   Welcome Back
                 </h2>
-                <p className="text-white">Sign in to your account</p>
+                <p className="text-color-primary opacity-80">Sign in to your account</p>
               </div>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* EMAIL */}
                 <div>
                   <div className="relative">
-                    <MailIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1" />
+                    <MailIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-color-primary" />
                     <input
                       {...register("email")}
                       type="email"
-                      className={`input pl-10 w-full ${errors.email ? "border-red-500" : ""}`}
+                      className={`input pl-10 w-full bg-color-secondary text-color-primary border-color-three ${errors.email ? "border-red-500" : ""}`}
                       placeholder="johndoe@gmail.com"
                     />
                   </div>
@@ -63,11 +63,11 @@ function LoginPage() {
                 {/* PASSWORD */}
                 <div>
                   <div className="relative">
-                    <LockIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1" />
+                    <LockIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-color-primary" />
                     <input
                       {...register("password")}
                       type="password"
-                      className={`input w-full pl-10 ${errors.password ? "border-red-500" : ""}`}
+                      className={`input w-full pl-10 bg-color-secondary text-color-primary border-color-three ${errors.password ? "border-red-500" : ""}`}
                       placeholder="Enter your password"
                     />
                   </div>
@@ -79,8 +79,9 @@ function LoginPage() {
                 </div>
 
                 {/* SUBMIT BUTTON */}
+                {/* SUBMIT BUTTON */}
                 <button
-                  className="auth-btn w-full border border-white h-[40px]"
+                  className="auth-btn w-full border border-transparent bg-blue-500 text-white h-[45px] hover:opacity-90 transition-all active:scale-95 rounded-sm font-semibold shadow-lg text-[15px]"
                   type="submit"
                   disabled={loginMutation.isPending}
                 >
@@ -93,25 +94,24 @@ function LoginPage() {
               </form>
 
               <div className="mt-6 text-center">
-                <Link href="/signup" className="auth-link hover:underline">
+                <Link href="/signup" className="auth-link hover:underline text-color-primary">
                   Don't have an account? Sign up
                 </Link>
               </div>
             </div>
           </div>
 
-          <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-gradient-to-bl from-slate-800/20 to-transparent">
+          <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-color-secondary rounded-xl m-4">
             <div className="text-center">
             
-              <h3 className="text-xl font-medium text-cyan-400 mt-6">
+              <h3 className="text-xl font-medium text-color-five mt-6">
                 Continue Your Journey Today
               </h3>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>)
 }
 
 export default LoginPage;

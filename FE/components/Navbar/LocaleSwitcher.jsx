@@ -12,7 +12,7 @@ export default function LocaleSwitcher() {
   return (
     <LocaleSwitcherSelect defaultValue={locale} label={t('label')}>
       {routing.locales.map((cur) => (
-        <option className='text-white' key={cur} value={cur}>
+        <option className='text-color-primary bg-bg-primary ' key={cur} value={cur}>
           {t('locale', {locale: cur})}
         </option>
       ))}

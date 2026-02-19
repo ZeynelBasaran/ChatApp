@@ -57,7 +57,7 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${outfit.variable}  antialiased border-base-content/10 bg-[linear-gradient(to_right,#1E293B_0%,#1E293B_10%,#3B0764_50%,#1E293B_90%,#1E293B_100%)] `}>
+      <body className={`${outfit.variable}  antialiased border-base-content/10 bg-bg-primary text-color-primary`}>
         <NextIntlClientProvider>
           <QueryProvider>
             <ThemeProvider attribute="class" defaultTheme="system">

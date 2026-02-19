@@ -1,15 +1,13 @@
 "use client"
 
 import { useTheme } from "next-themes"
-import Image from "next/image"
 import { useEffect, useState } from "react"
+import { Sun, Moon, Monitor } from "lucide-react"
 
 const ModeToggle = () => {
   const { setTheme, theme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  // Hydration hatasını önlemek için client-side render'ı bekleyelim
-  // Bu pattern next-themes için gerekli ve standart bir yaklaşımdır
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -20,47 +18,41 @@ const ModeToggle = () => {
     else setTheme("light")
   }
 
-  const getIcon = () => {
-    if (!mounted || !theme) return "/svg/toggleTheme/system.svg"
-    
-    switch (theme) {
-      case "light":
-        return "/svg/toggleTheme/sun.svg"
-      case "dark":
-        return "/svg/toggleTheme/moon.svg"
-      case "system":
-        return "/svg/toggleTheme/system.svg"
-      default:
-        return "/svg/toggleTheme/system.svg"
-    }
-  }
-
-  // İlk render'da (server-side) sabit bir placeholder göster
-  // dark: class'ı kullanmıyoruz çünkü bu hydration hatasına neden olabilir
   if (!mounted) {
     return (
-      <div className="w-[41px] h-[41px] border border-gray-300 rounded-lg flex flex-col justify-center items-center p-1">
-        <div className="w-[25px] h-[25px] "></div>
+      <div className="w-[35px] h-[35px] border border-black rounded-lg flex flex-col justify-center items-center p-1 opacity-50">
+        <div className="w-[20px] h-[20px]"></div>
       </div>
     )
   }
 
-  // resolvedTheme gerçek temayı gösterir (light/dark), theme ise seçimi gösterir (light/dark/system)
   const isLight = resolvedTheme === "light"
+
+  
+  const renderIcon = () => {
+    if (!theme) return <Monitor size={20} className="text-color-primary" />
+    
+    switch (theme) {
+      case "light":
+        return <Sun size={20} className="text-black cursor-pointer" strokeWidth={2} />
+      case "dark":
+        return <Moon size={20} className="text-white cursor-pointer" strokeWidth={2} />
+      case "system":
+        return <Monitor size={20} className="text-color-primary cursor-pointer    " strokeWidth={2} />
+      default:
+        return <Monitor size={20} className="text-color-primary cursor-pointer" strokeWidth={2} />
+    }
+  }
 
   return (
     <div className="cursor-pointer">
       <button 
         onClick={handleToggle} 
-        className={`${isLight ? "border-white" : "border-white"} cursor-pointer border rounded-lg flex flex-col justify-center items-center p-1`}
-        aria-label="Toggle theme"
+        className={`border  hover:bg-color-secondary/50 transition-colors rounded-lg w-[35px] h-[35px] flex justify-center items-center p-1 ${theme === "dark" ? 'border-white' : 'border-black' }`}
+        aria-label={`Current theme: ${theme}`}
+        title={`Change theme (Current: ${theme})`}
       >
-        <Image
-          src={getIcon()}
-          width={25}
-          height={25}
-          alt="Toggle theme"
-        />
+        {renderIcon()}
       </button>
     </div>
   )
