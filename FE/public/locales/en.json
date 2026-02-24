@@ -5,8 +5,48 @@
   "Home": {
     "home": "Hello Home Component EN"
   },
-   "LocaleSwitcher": {
+  "LocaleSwitcher": {
     "label": "Change Language",
-    "locale": "{locale, select, tr {TR} en {EN} other {Tanımsız}}"
+    "locale": "{locale, select, tr {TR} en {EN} other {Unknown}}"
+  },
+  "Auth": {
+    "createAccountTitle": "Create Account",
+    "createAccountSubtitle": "Sign up for a new account",
+    "fullNamePlaceholder": "John Doe",
+    "emailPlaceholder": "johndoe@gmail.com",
+    "passwordPlaceholder": "Enter your password",
+    "createAccountButton": "Create Account",
+    "alreadyHaveAccount": "Already have an account? Login",
+    "startJourney": "Start Your Journey Today",
+    "welcomeBackTitle": "Welcome Back",
+    "welcomeBackSubtitle": "Sign in to your account",
+    "signInButton": "Sign In",
+    "dontHaveAccount": "Don't have an account? Sign up",
+    "continueJourney": "Continue Your Journey Today"
+  },
+  "Footer": {
+    "links": "Links",
+    "signUp": "Sign Up",
+    "login": "Login",
+    "followMe": "Follow Me",
+    "rightsReserved": "All Rights Reserved."
+  },
+  "Landing": {
+    "label": "Simple • Secure • Fast",
+    "title1": "Messaging in its",
+    "title2": "purest form.",
+    "subtitle": "Experience a chat environment designed for clarity. No distractions, just meaningful conversations.",
+    "signUp": "Sign Up",
+    "login": "Login"
+  },
+  "Error": {
+    "title": "Something went wrong!",
+    "unknown": "An unknown error occurred",
+    "tryAgain": "Try again"
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "goHome": "Go Home"
   }
 }

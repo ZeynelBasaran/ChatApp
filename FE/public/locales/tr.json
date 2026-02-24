@@ -1,12 +1,52 @@
 {
   "HomePage": {
-    "title": "Merhaba"
+    "title": "Merhaba dünya!"
   },
-   "Home": {
+  "Home": {
     "home": "Merhaba Server Component TR"
   },
-   "LocaleSwitcher": {
-    "label": "Dil Degiştir",
-    "locale": "{locale, select, tr {TR} en {EN} other {Tanımsız}}"
+  "LocaleSwitcher": {
+    "label": "Dil Değiştir",
+    "locale": "{locale, select, tr {TR} en {EN} other {Bilinmiyor}}"
+  },
+  "Auth": {
+    "createAccountTitle": "Hesap Oluştur",
+    "createAccountSubtitle": "Yeni bir hesap oluşturun",
+    "fullNamePlaceholder": "Ad Soyad",
+    "emailPlaceholder": "ornek@gmail.com",
+    "passwordPlaceholder": "Şifrenizi girin",
+    "createAccountButton": "Hesap Oluştur",
+    "alreadyHaveAccount": "Zaten hesabınız var mı? Giriş yapın",
+    "startJourney": "Yolculuğunuza Bugün Başlayın",
+    "welcomeBackTitle": "Tekrar Hoşgeldiniz",
+    "welcomeBackSubtitle": "Hesabınıza giriş yapın",
+    "signInButton": "Giriş Yap",
+    "dontHaveAccount": "Hesabınız yok mu? Kaydolun",
+    "continueJourney": "Yolculuğunuza Devam Edin"
+  },
+  "Footer": {
+    "links": "Bağlantılar",
+    "signUp": "Kaydol",
+    "login": "Giriş Yap",
+    "followMe": "Beni Takip Et",
+    "rightsReserved": "Tüm Hakları Saklıdır."
+  },
+  "Landing": {
+    "label": "Basit • Güvenli • Hızlı",
+    "title1": "İletişimin en",
+    "title2": "saf hali.",
+    "subtitle": "Netlik için tasarlanmış bir sohbet ortamını deneyimleyin. Dikkat dağıtıcı unsurlar yok, sadece anlamlı konuşmalar.",
+    "signUp": "Kaydol",
+    "login": "Giriş Yap"
+  },
+  "Error": {
+    "title": "Bir şeyler ters gitti!",
+    "unknown": "Bilinmeyen bir hata oluştu",
+    "tryAgain": "Tekrar dene"
+  },
+  "NotFound": {
+    "title": "Sayfa Bulunamadı",
+    "description": "Aradığınız sayfa mevcut değil.",
+    "goHome": "Ana Sayfaya Dön"
   }
 }

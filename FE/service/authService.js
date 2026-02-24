@@ -46,6 +46,7 @@ export const useAuth = () => {
   const loginMutation = useMutation({
     mutationFn: async (data) => {
       const res = await apiFactory.post("/auth/login", data);
+      console.log(res);
       return res.data;
     },
 
@@ -59,7 +60,7 @@ export const useAuth = () => {
     },
 
     onError: (error) => {
-      toast.error("Login failed", {
+      toast.error("Login failed", console.log("hata",error), {
         description:
           error.response?.data?.message ||
           error.message ||

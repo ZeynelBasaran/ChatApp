@@ -10,8 +10,10 @@ import {
   LoaderIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 function LoginPage() {
+  const t = useTranslations('Auth');
   const { loginMutation } = useAuth();
 
   const {
@@ -36,21 +38,21 @@ function LoginPage() {
               <div className="text-center mb-8">
                 <MessageCircleIcon className="w-12 h-12 mx-auto text-color-primary mb-4" />
                 <h2 className="text-2xl font-bold text-color-primary mb-2">
-                  Welcome Back
+                  {t('welcomeBackTitle')}
                 </h2>
-                <p className="text-color-primary opacity-80">Sign in to your account</p>
+                <p className="text-color-primary opacity-80">{t('welcomeBackSubtitle')}</p>
               </div>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* EMAIL */}
                 <div>
                   <div className="relative">
-                    <MailIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-color-primary" />
+                    <MailIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-black" />
                     <input
                       {...register("email")}
                       type="email"
-                      className={`input pl-10 w-full bg-color-secondary text-color-primary border-color-three ${errors.email ? "border-red-500" : ""}`}
-                      placeholder="johndoe@gmail.com"
+                      className={`input pl-10 w-full bg-color-secondary text-black border-color-three ${errors.email ? "border-red-500" : ""}`}
+                      placeholder={t('emailPlaceholder')}
                     />
                   </div>
                   {errors.email && (
@@ -63,12 +65,12 @@ function LoginPage() {
                 {/* PASSWORD */}
                 <div>
                   <div className="relative">
-                    <LockIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-color-primary" />
+                    <LockIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-black" />
                     <input
                       {...register("password")}
                       type="password"
-                      className={`input w-full pl-10 bg-color-secondary text-color-primary border-color-three ${errors.password ? "border-red-500" : ""}`}
-                      placeholder="Enter your password"
+                      className={`input w-full pl-10 bg-color-secondary text-black border-color-three ${errors.password ? "border-red-500" : ""}`}
+                      placeholder={t('passwordPlaceholder')}
                     />
                   </div>
                   {errors.password && (
@@ -88,14 +90,14 @@ function LoginPage() {
                   {loginMutation.isPending ? (
                     <LoaderIcon className="mx-auto h-5 animate-spin" />
                   ) : (
-                    "Sign In"
+                    t('signInButton')
                   )}
                 </button>
               </form>
 
               <div className="mt-6 text-center">
                 <Link href="/signup" className="auth-link hover:underline text-color-primary">
-                  Don't have an account? Sign up
+                  {t('dontHaveAccount')}
                 </Link>
               </div>
             </div>
@@ -105,7 +107,7 @@ function LoginPage() {
             <div className="text-center">
             
               <h3 className="text-xl font-medium text-color-five mt-6">
-                Continue Your Journey Today
+                {t('continueJourney')}
               </h3>
             </div>
           </div>

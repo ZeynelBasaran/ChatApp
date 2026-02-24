@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Linkedin,Github } from 'lucide-react';
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+  const t = useTranslations('Footer');
   return (
     <footer className="lg:px-20 md:px-8 px-4 py-4  border-t border-gray-200 dark:border-white/10 w-full max-w-360 text-color-primary ">
       <div className="container mx-auto ">
@@ -21,16 +23,16 @@ const Footer = () => {
 
           <div className="grid grid-cols-2  sm:grid-cols-3">
             <div>
-              <h2 className="mb-2 text-sm font-semibold uppercase">Links</h2>
+              <h2 className="mb-2 text-sm font-semibold uppercase">{t('links')}</h2>
               <ul className="space-y-2">
                 <li>
                   <Link href={"/signup"} className="hover:underline">
-                    Sign Up
+                    {t('signUp')}
                   </Link>
                 </li>
                 <li>
                   <Link href={"/login"} className="hover:underline">
-                    Login
+                    {t('login')}
                   </Link>
                 </li>
               </ul>
@@ -38,7 +40,7 @@ const Footer = () => {
 
             <div>
               <h2 className="mb-2 text-sm font-semibold uppercase">
-                Follow Me
+                {t('followMe')}
               </h2>
               <ul className="space-y-2">
                 <li>
@@ -69,7 +71,7 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row items-center  md:justify-between">
           <span className="text-sm opacity-70">
-            © {new Date().getFullYear()} Zeynel Başaran. All Rights Reserved.
+            © {new Date().getFullYear()} Zeynel Başaran. {t('rightsReserved')}
           </span>
 
           <div className="flex mt-4 space-x-6 sm:mt-0 ">
