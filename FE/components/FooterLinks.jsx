@@ -17,7 +17,15 @@ export default function FooterLinks({ isAuthServer, signUpLabel, loginLabel, lin
     // İkisinden biri true ise giriş yapılmış sayılır
     const isAuth = isAuthServer || !!authUser || !!authQuery.data;
 
+
+    console.log("isAuthServer", isAuthServer);
+    console.log("authUser", authUser);
+    console.log("authQuery.data", authQuery.data);
+
+
     if (isAuth) return null;
+
+
 
     return (
         <div>
