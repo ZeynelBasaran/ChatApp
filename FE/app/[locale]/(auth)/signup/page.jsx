@@ -32,28 +32,28 @@ function SignUpPage() {
   };
 
   return (
-    <div className="w-full flex-1 items-center justify-center text-black max-w-360 lg:px-20 md:px-8 px-4">
+    <div className="w-full flex-1 items-center justify-center text-color-primary max-w-360 lg:px-20 md:px-8 px-4">
       <div className="relative w-full max-w-6xl">
         <div className="w-full flex flex-col md:flex-row">
           <div className="md:w-1/2 p-8 flex items-center justify-center ">
             <div className="w-full max-w-md">
               <div className="text-center mb-8">
-                <MessageCircleIcon className="w-12 h-12 mx-auto text-white mb-4" />
-                <h2 className="text-2xl font-bold text-white mb-2">
+                <MessageCircleIcon className="w-12 h-12 mx-auto text-color-primary mb-4" />
+                <h2 className="text-2xl font-bold text-color-primary mb-2">
                   {t('createAccountTitle')}
                 </h2>
-                <p className="text-white opacity-80">{t('createAccountSubtitle')}</p>
+                <p className="text-color-primary opacity-80">{t('createAccountSubtitle')}</p>
               </div>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* FULL NAME */}
                 <div>
                   <div className="relative">
-                    <UserIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-10 text-black" />
+                    <UserIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-10 text-color-primary" />
                     <input
                       {...register("fullName")}
                       type="text"
-                      className={`input pl-10 w-full bg-color-secondary text-black border-color-three ${errors.fullName ? "border-red-500" : ""}`}
+                      className={`input pl-10 w-full bg-color-secondary text-color-primary border-color-three ${errors.fullName ? "border-red-500" : ""}`}
                       placeholder={t('fullNamePlaceholder')}
                     />
                   </div>
@@ -67,11 +67,11 @@ function SignUpPage() {
                 {/* EMAIL */}
                 <div>
                   <div className="relative">
-                    <MailIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-black" />
+                    <MailIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-color-primary" />
                     <input
                       {...register("email")}
                       type="email"
-                      className={`input pl-10 w-full bg-color-secondary text-black border-color-three ${errors.email ? "border-red-500" : ""}`}
+                      className={`input pl-10 w-full bg-color-secondary text-color-primary border-color-three ${errors.email ? "border-red-500" : ""}`}
                       placeholder={t('emailPlaceholder')}
                     />
                   </div>
@@ -85,11 +85,11 @@ function SignUpPage() {
                 {/* PASSWORD */}
                 <div>
                   <div className="relative">
-                    <LockIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-black" />
+                    <LockIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-color-primary" />
                     <input
                       {...register("password")}
                       type="password"
-                      className={`input w-full pl-10 bg-color-secondary text-black border-color-three ${errors.password ? "border-red-500" : ""}`}
+                      className={`input w-full pl-10 bg-color-secondary text-color-primary border-color-three ${errors.password ? "border-red-500" : ""}`}
                       placeholder={t('passwordPlaceholder')}
                     />
                   </div>
@@ -115,7 +115,7 @@ function SignUpPage() {
               </form>
 
               <div className="mt-6 text-center">
-                <Link href="/login" className="auth-link hover:underline text-white">
+                <Link href="/login" className="auth-link hover:underline text-color-primary">
                   {t('alreadyHaveAccount')}
                 </Link>
               </div>
@@ -125,7 +125,7 @@ function SignUpPage() {
           <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-color-secondary rounded-xl m-4">
             <div className="text-center">
 
-              <h3 className="text-xl font-medium text-white mt-6">
+              <h3 className="text-xl font-medium text-color-primary mt-6">
                 {t('startJourney')}
               </h3>
 

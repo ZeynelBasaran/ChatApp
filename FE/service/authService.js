@@ -15,6 +15,7 @@ export const useAuth = () => {
     queryFn: async () => {
       const { data } = await apiFactory.get("/auth/check");
       return data;
+      console.log("data:", data)
     },
     retry: false,
     staleTime: 1000 * 60 * 5,
@@ -57,10 +58,12 @@ export const useAuth = () => {
       toast.success("Login successful", {
         description: "You are being redirected.",
       });
+      router.push("/");
+      router.refresh(); // Ensure the server components re-evaluate the cookies
     },
 
     onError: (error) => {
-      toast.error("Login failed", console.log("hata",error), {
+      toast.error("Login failed", console.log("hata", error), {
         description:
           error.response?.data?.message ||
           error.message ||

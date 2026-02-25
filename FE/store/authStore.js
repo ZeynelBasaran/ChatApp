@@ -5,23 +5,27 @@ import { API_BASE_URL } from "../lib/axios";
 export const useAuthStore = create((set, get) => ({
   socket: null,
   onlineUsers: [],
+  authUser: null,
 
-  connectSocket: (authUser) => {
-    if (!authUser || get().socket?.connected) return;
+  setAuthUser: (user) => set({ authUser: user }),
 
-    const socket = io(API_BASE_URL, { withCredentials: true });
-    socket.connect();
-    set({ socket });
+  connectSocket: () => {
+    const { authUser, socket } = get();
+    if (!authUser || socket?.connected) return;
 
-    socket.on("getOnlineUsers", (userIds) => {
+    const newSocket = io(API_BASE_URL, {
+      withCredentials: true,
+    });
+
+    newSocket.on("getOnlineUsers", (userIds) => {
       set({ onlineUsers: userIds });
     });
+
+    set({ socket: newSocket });
   },
 
   disconnectSocket: () => {
-    if (get().socket?.connected) {
-      get().socket.disconnect();
-      set({ socket: null });
-    }
+    get().socket?.disconnect();
+    set({ socket: null });
   },
 }));

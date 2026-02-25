@@ -47,11 +47,11 @@ function LoginPage() {
                 {/* EMAIL */}
                 <div>
                   <div className="relative">
-                    <MailIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-black" />
+                    <MailIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-white" />
                     <input
                       {...register("email")}
                       type="email"
-                      className={`input pl-10 w-full bg-color-secondary text-black border-color-three ${errors.email ? "border-red-500" : ""}`}
+                      className={`input pl-10 w-full bg-[#393165]  text-white border-color-three ${errors.email ? "border-red-500" : ""}`}
                       placeholder={t('emailPlaceholder')}
                     />
                   </div>
@@ -65,11 +65,11 @@ function LoginPage() {
                 {/* PASSWORD */}
                 <div>
                   <div className="relative">
-                    <LockIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-black" />
+                    <LockIcon className="auth-input-icon absolute left-2 top-1/2 -translate-y-1/2 z-1 text-white" />
                     <input
                       {...register("password")}
                       type="password"
-                      className={`input w-full pl-10 bg-color-secondary text-black border-color-three ${errors.password ? "border-red-500" : ""}`}
+                      className={`input w-full pl-10  bg-[#393165]  text-white border-color-three ${errors.password ? "border-red-500" : ""}`}
                       placeholder={t('passwordPlaceholder')}
                     />
                   </div>
@@ -105,7 +105,7 @@ function LoginPage() {
 
           <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-color-secondary rounded-xl m-4">
             <div className="text-center">
-            
+
               <h3 className="text-xl font-medium text-color-five mt-6">
                 {t('continueJourney')}
               </h3>
