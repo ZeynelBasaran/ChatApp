@@ -8,9 +8,7 @@ import { ENV } from "./env.js";
 export const generateToken = (userId, res) => {
 
   const { JWT_SECRET, NODE_ENV } = ENV;
-
-  console.log("JWT_SECRET :", JWT_SECRET);
-  console.log("NODE_ENV :", NODE_ENV);  
+ 
   if (!JWT_SECRET || !NODE_ENV) {
     throw new Error("JWT_SECRET or NODE_ENV environment variable is not defined");
   }

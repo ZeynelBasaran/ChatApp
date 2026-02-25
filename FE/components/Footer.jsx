@@ -3,12 +3,17 @@ import { Linkedin, Github } from 'lucide-react';
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
+import FooterLinks from "./FooterLinks";
 
 const Footer = async () => {
   const t = await getTranslations('Footer');
 
+  // Server-side cookie kontrolü
+  // jwt: yerel geliştirmede okunabilir (aynı domain)
+  // Netlify+Render production'ında jwt backend domain'ine ait → okunamaz
+  // Bu yüzden her iki cookie de kontrol edilir
   const cookieStore = await cookies();
-  const isAuth = cookieStore.has("jwt");
+  const isAuthServer = cookieStore.has("jwt") || cookieStore.has("auth_indicator");
 
   return (
     <footer className="lg:px-20 md:px-8 px-4 py-4  border-t border-gray-200 dark:border-white/10 w-full max-w-360 text-color-primary ">
@@ -16,34 +21,18 @@ const Footer = async () => {
 
         <div className="md:flex md:justify-between mb-4">
           <Link href={"/"} className="flex gap-x-2 justify-center items-center">
-
             <Image src={"/İconFoot.png"} alt="icon" width={100} height={100} className="w-[30px] h-[30px] rounded-full" />
-
-
             <span className="text-lg font-semibold">  ChatApp</span>
-
-
-
           </Link>
 
           <div className="grid grid-cols-2  sm:grid-cols-3">
-            {!isAuth && (
-              <div>
-                <h2 className="mb-2 text-sm font-semibold uppercase">{t('links')}</h2>
-                <ul className="space-y-2">
-                  <li>
-                    <Link href={"/signup"} className="hover:underline">
-                      {t('signUp')}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"/login"} className="hover:underline">
-                      {t('login')}
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            )}
+            {/* Client component — hem server cookie hem store'dan auth okur */}
+            <FooterLinks
+              isAuthServer={isAuthServer}
+              linksLabel={t('links')}
+              signUpLabel={t('signUp')}
+              loginLabel={t('login')}
+            />
 
             <div>
               <h2 className="mb-2 text-sm font-semibold uppercase">
@@ -105,5 +94,3 @@ const Footer = async () => {
 };
 
 export default Footer;
-
-
