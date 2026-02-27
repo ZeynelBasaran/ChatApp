@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
-import HomePageContent from "../../components/HomePageContent";
+import ChatLandingPage from "../../components/ChatLandingPage";
+import HeroHomePage from "../../components/HeroHomePage";
 
 export default async function Home({ params }) {
   const { locale } = await params;
@@ -11,11 +12,7 @@ export default async function Home({ params }) {
   // Netlify+Render production'ında jwt backend domain'ine ait → okunamaz
   // Bu yüzden her iki cookie de kontrol edilir
   const cookieStore = await cookies();
-  const isAuthServer = cookieStore.has("jwt") || cookieStore.has("auth_indicator");
+  const isAuth = cookieStore.has("jwt") || cookieStore.has("auth_indicator");
 
-  return (
-    <div className="flex-1 flex-col bg-contain w-full">
-      <HomePageContent isAuthServer={isAuthServer} />
-    </div>
-  );
+  return isAuth ? <ChatLandingPage /> : <HeroHomePage />;
 }

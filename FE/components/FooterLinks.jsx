@@ -18,6 +18,10 @@ export default function FooterLinks({ isAuthServer, signUpLabel, loginLabel, lin
 
     const isAuth = isAuthServer || !!authUser || !!cachedUser;
 
+
+    console.log("AuthUser", authUser);
+    console.log("isAuth", isAuth);
+
     if (isAuth) return null;
 
 

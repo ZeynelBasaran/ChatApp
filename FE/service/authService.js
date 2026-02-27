@@ -6,7 +6,7 @@ import { useRouter } from "../i18n/navigation";
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
-  const { connectSocket, disconnectSocket,setAuthUser } = useAuthStore();
+  const { connectSocket, disconnectSocket, setAuthUser } = useAuthStore();
   const router = useRouter();
 
   // 1. Auth Kontrolü
@@ -47,13 +47,16 @@ export const useAuth = () => {
   const loginMutation = useMutation({
     mutationFn: async (data) => {
       const res = await apiFactory.post("/auth/login", data);
-      console.log("login res",res.data)
+      console.log("login res", res.data)
       return res.data;
     },
 
     onSuccess: (data) => {
       queryClient.setQueryData(["authUser"], data);
       connectSocket(data);
+
+      // Backend cookie'sini (jwt) Netlify/Next.js göremediği için yardımcı cookie:
+      document.cookie = "auth_indicator=true; path=/; max-age=604800"; // 7 days
 
       toast.success("Login successful", {
         description: "You are being redirected.",
@@ -78,9 +81,17 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.setQueryData(["authUser"], null);
       disconnectSocket();
+
+      // Kullanıcı çıkış yaptığında yardımcı cookie'yi de sil
+      document.cookie = "auth_indicator=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
       toast.success("Çıkış yapıldı", {
         description: "Tekrar görüşmek üzere!",
       });
+
+      setAuthUser(null);
+      
+      router.refresh(); // Server component'leri tetikle
     },
     onError: () => {
       toast.error("Çıkış yapılırken bir hata oluştu.");

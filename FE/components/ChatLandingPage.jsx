@@ -26,14 +26,16 @@ const HomePage = () => {
   }, []);
 
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Unauthorized</div>;
+  if (isLoading) return <main className="flex-1 flex flex-col items-center h-full justify-center text-center lg:px-20 md:px-8 px-4  mx-auto  max-w-360 ">
+    Loading...</main>;
+  if (isError) return <main className="flex-1 flex flex-col items-center h-full justify-center text-center lg:px-20 md:px-8 px-4  mx-auto  max-w-360 ">
+    Loading...</main>;
 
 
   return (
-    <div>
+    <main className="flex-1 flex flex-col items-center h-full justify-center text-center lg:px-20 md:px-8 px-4  mx-auto  max-w-360 ">
       <h1>Welcome {user?.fullName}</h1>
-    </div>
+    </main>
   );
 };
 
