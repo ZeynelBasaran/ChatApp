@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useAuthStore } from "../store/authStore";
-import { useAuth } from "../service/authService";
+import { useQueryClient } from "@tanstack/react-query";
 
 /**
  * FooterLinks — Client Component
@@ -12,16 +12,11 @@ import { useAuth } from "../service/authService";
  */
 export default function FooterLinks({ isAuthServer, signUpLabel, loginLabel, linksLabel }) {
     const { authUser } = useAuthStore();
-    const { authQuery } = useAuth();
+    // useQueryClient: yeni istek açmadan mevcut React Query cache'ini okur
+    const queryClient = useQueryClient();
+    const cachedUser = queryClient.getQueryData(["authUser"]);
 
-    // İkisinden biri true ise giriş yapılmış sayılır
-    const isAuth = isAuthServer || !!authUser || !!authQuery.data;
-
-
-    console.log("isAuthServer", isAuthServer);
-    console.log("authUser", authUser);
-    console.log("authQuery.data", authQuery.data);
-
+    const isAuth = isAuthServer || !!authUser || !!cachedUser;
 
     if (isAuth) return null;
 

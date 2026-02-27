@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Linkedin, Github } from 'lucide-react';
+import { Linkedin, Github, Mail } from 'lucide-react';
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
@@ -85,6 +85,13 @@ const Footer = async () => {
               className="hover:text-blue-500 transition"
             >
               <Github size={22} strokeWidth={1.8} />
+            </Link>
+
+            <Link
+              href="mailto:zeynelbasaran@hotmail.com"
+              className="hover:text-blue-500 transition"
+            >
+              <Mail size={22} strokeWidth={1.8} />
             </Link>
           </div>
         </div>

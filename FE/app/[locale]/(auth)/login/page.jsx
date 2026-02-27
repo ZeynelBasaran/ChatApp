@@ -51,7 +51,8 @@ function LoginPage() {
                     <input
                       {...register("email")}
                       type="email"
-                      className={`input pl-10 w-full bg-[#393165]  text-white border-color-three ${errors.email ? "border-red-500" : ""}`}
+                      disabled={loginMutation.isPending}
+                      className={`input pl-10 w-full bg-[#393165] text-white border-color-three disabled:opacity-50 disabled:cursor-not-allowed ${errors.email ? "border-red-500" : ""}`}
                       placeholder={t('emailPlaceholder')}
                     />
                   </div>
@@ -69,7 +70,8 @@ function LoginPage() {
                     <input
                       {...register("password")}
                       type="password"
-                      className={`input w-full pl-10  bg-[#393165]  text-white border-color-three ${errors.password ? "border-red-500" : ""}`}
+                      disabled={loginMutation.isPending}
+                      className={`input w-full pl-10 bg-[#393165] text-white border-color-three disabled:opacity-50 disabled:cursor-not-allowed ${errors.password ? "border-red-500" : ""}`}
                       placeholder={t('passwordPlaceholder')}
                     />
                   </div>
@@ -80,10 +82,8 @@ function LoginPage() {
                   )}
                 </div>
 
-                {/* SUBMIT BUTTON */}
-                {/* SUBMIT BUTTON */}
                 <button
-                  className="auth-btn w-full border border-transparent bg-blue-500 text-white h-[45px] hover:opacity-90 transition-all active:scale-95 rounded-sm font-semibold shadow-lg text-[15px]"
+                  className="auth-btn w-full border border-transparent bg-blue-500 text-white h-[45px] hover:opacity-90 transition-all active:scale-95 rounded-sm font-semibold shadow-lg text-[15px] disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100"
                   type="submit"
                   disabled={loginMutation.isPending}
                 >

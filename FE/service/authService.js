@@ -2,11 +2,11 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import apiFactory from "../lib/axios";
 import { useAuthStore } from "../store/authStore";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter } from "../i18n/navigation";
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
-  const { connectSocket, disconnectSocket } = useAuthStore();
+  const { connectSocket, disconnectSocket,setAuthUser } = useAuthStore();
   const router = useRouter();
 
   // 1. Auth Kontrolü
@@ -14,8 +14,8 @@ export const useAuth = () => {
     queryKey: ["authUser"],
     queryFn: async () => {
       const { data } = await apiFactory.get("/auth/check");
+      setAuthUser(data);
       return data;
-      console.log("data:", data)
     },
     retry: false,
     staleTime: 1000 * 60 * 5,
@@ -47,7 +47,7 @@ export const useAuth = () => {
   const loginMutation = useMutation({
     mutationFn: async (data) => {
       const res = await apiFactory.post("/auth/login", data);
-      console.log(res);
+      console.log("login res",res.data)
       return res.data;
     },
 

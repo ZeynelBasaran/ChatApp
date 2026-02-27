@@ -3,7 +3,7 @@
 import HeroHomePage from "./HeroHomePage";
 import ChatLandingPage from "./ChatLandingPage";
 import { useAuthStore } from "../store/authStore";
-import { useAuth } from "../service/authService";
+import { useQueryClient } from "@tanstack/react-query";
 
 /**
  * HomePageContent — Client Component
@@ -13,9 +13,11 @@ import { useAuth } from "../service/authService";
  */
 export default function HomePageContent({ isAuthServer }) {
     const { authUser } = useAuthStore();
-    const { authQuery } = useAuth();
+    // useQueryClient: yeni istek açmadan mevcut React Query cache'ini okur
+    const queryClient = useQueryClient();
+    const cachedUser = queryClient.getQueryData(["authUser"]);
 
-    const isAuth = isAuthServer || !!authUser || !!authQuery.data;
+    const isAuth = isAuthServer || !!authUser || !!cachedUser;
 
     return isAuth ? <ChatLandingPage /> : <HeroHomePage />;
 }
