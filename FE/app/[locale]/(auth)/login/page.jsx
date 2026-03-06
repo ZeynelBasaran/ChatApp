@@ -2,7 +2,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../../../lib/zod";
-import { useAuth } from "../../../../service/authService";
+import {
+  useAuthService
+} from "../../../../service/authService";
 import {
   MessageCircleIcon,
   LockIcon,
@@ -14,7 +16,7 @@ import { useTranslations } from "next-intl";
 
 function LoginPage() {
   const t = useTranslations('Auth');
-  const { loginMutation } = useAuth();
+  const { loginMutation } = useAuthService();
 
   const {
     register,

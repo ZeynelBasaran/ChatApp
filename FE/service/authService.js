@@ -4,7 +4,7 @@ import { useAuthStore } from "../store/authStore";
 import { toast } from "sonner";
 import { useRouter } from "../i18n/navigation";
 
-export const useAuth = () => {
+export const useAuthService = () => {
   const queryClient = useQueryClient();
   const { connectSocket, disconnectSocket, setAuthUser } = useAuthStore();
   const router = useRouter();
@@ -90,11 +90,29 @@ export const useAuth = () => {
       });
 
       setAuthUser(null);
-      
+
       router.refresh(); // Server component'leri tetikle
     },
     onError: () => {
       toast.error("Çıkış yapılırken bir hata oluştu.");
+    },
+  });
+
+  // 5. Update Profile
+  const updateProfileMutation = useMutation({
+    mutationFn: async (data) => {
+      const res = await apiFactory.put("/auth/update-profile", data);
+      return res.data;
+    },
+    onSuccess: (updatedUser) => {
+      queryClient.setQueryData(["authUser"], updatedUser);
+      setAuthUser(updatedUser);
+      toast.success("Profile updated successfully!");
+    },
+    onError: (error) => {
+      toast.error("Error updating profile", {
+        description: error.response?.data?.message || "Something went wrong.",
+      });
     },
   });
 
@@ -103,5 +121,6 @@ export const useAuth = () => {
     signupMutation,
     loginMutation,
     logoutMutation,
+    updateProfileMutation,
   };
 };

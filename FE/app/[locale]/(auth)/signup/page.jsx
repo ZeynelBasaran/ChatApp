@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "../../../../lib/zod";
-import { useAuth } from "../../../../service/authService";
+import { useAuthService } from "../../../../service/authService";
 import {
   MessageCircleIcon,
   LockIcon,
@@ -16,7 +16,7 @@ import Image from "next/image";
 
 function SignUpPage() {
   const t = useTranslations('Auth');
-  const { signupMutation } = useAuth();
+  const { signupMutation } = useAuthService();
 
   const {
     register,

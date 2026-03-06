@@ -5,7 +5,7 @@ import Button from "./Button";
 
 export default function Error({ error, reset }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[400px] p-4">
+    <div className="flex-1 flex flex-col items-center justify-center min-h-[400px] p-4">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-red-600 mb-4">
           Something went wrong!
