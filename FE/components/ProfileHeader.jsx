@@ -6,9 +6,6 @@ import { useAuthStore } from "../store/authStore";
 import { useChatStore } from "../store/chatStore";
 import { useAuthService } from "../service/authService";
 
-
-// Session storage, audio gibi window apileri SSR tarafinda hataya sebep oldugu icin
-// component disinda degil iceride kullanilmalidir.
 function ProfileHeader() {
     const { authUser } = useAuthStore();
     const { isSoundEnabled, toggleSound } = useChatStore();
@@ -29,7 +26,9 @@ function ProfileHeader() {
             const base64Image = reader.result;
             setSelectedImg(base64Image);
             // react-query mutation kullanarak update yap
-            updateProfileMutation.mutate({ profilePic: base64Image });
+            if (updateProfileMutation) {
+                updateProfileMutation.mutate({ profilePic: base64Image });
+            }
         };
     };
 
@@ -44,7 +43,7 @@ function ProfileHeader() {
                             onClick={() => fileInputRef.current.click()}
                         >
                             <img
-                                src={selectedImg || authUser.profilePic || "/avatar.png"}
+                                src={selectedImg || authUser?.profilePic || "/avatar.png"}
                                 alt="User image"
                                 className="size-full object-cover"
                             />
@@ -65,7 +64,7 @@ function ProfileHeader() {
                     {/* USERNAME & ONLINE TEXT */}
                     <div>
                         <h3 className="text-slate-200 font-medium text-base max-w-[180px] truncate">
-                            {authUser.fullName}
+                            {authUser?.fullName || "Loading..."}
                         </h3>
 
                         <p className="text-green-500 text-xs">Online</p>
@@ -77,7 +76,7 @@ function ProfileHeader() {
                     {/* LOGOUT BTN */}
                     <button
                         className="text-slate-400 hover:text-slate-200 transition-colors"
-                        onClick={() => logoutMutation.mutate()}
+                        onClick={() => logoutMutation?.mutate()}
                     >
                         <LogOutIcon className="size-5" />
                     </button>
@@ -103,4 +102,5 @@ function ProfileHeader() {
         </div>
     );
 }
+
 export default ProfileHeader;

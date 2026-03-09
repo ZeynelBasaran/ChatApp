@@ -34,14 +34,16 @@ export const useChatStore = create((set, get) => ({
     addMessage: (message) => set({ messages: [...get().messages, message] }),
 
     subscribeToMessages: (socket) => {
-        const { selectedUser, isSoundEnabled, addMessage } = get();
-        if (!selectedUser || !socket) return;
+        if (!socket) return;
 
         // Önce aynı event dinleniyorsa temizle (çoklu render sorunları için)
         socket.off("newMessage");
 
         socket.on("newMessage", (newMessage) => {
+            const { selectedUser, isSoundEnabled, addMessage } = get();
+
             // Mesaj seçili olandan mı geldi?
+            if (!selectedUser) return;
             const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
             if (!isMessageSentFromSelectedUser) return;
 

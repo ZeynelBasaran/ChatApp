@@ -14,6 +14,14 @@ A robust Node.js backend for the Real-time Chat Application.
 *   **Email Service:** Resend
 *   **Utility:** Dotenv, CORS, Express Rate Limit
 
+## ✨ Backend Features
+
+*   **RESTful API Architecture:** Structured controllers and routes.
+*   **Secure Authentication:** Password hashing using `bcryptjs` and `JWT`-based sessions with HttpOnly cookies.
+*   **Real-time Engine:** Event-based communication with configured Socket.io.
+*   **Image Management:** Seamless image uploading and URL fetching via Cloudinary.
+*   **Rate Limiting:** Protects against spam and brute-force attacks via `express-rate-limit`.
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -43,11 +51,14 @@ A robust Node.js backend for the Real-time Chat Application.
     MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=your_jwt_secret
     NODE_ENV=development
-    CLOUDINARY_CLOUD_NAME=your_cloud_name
-    CLOUDINARY_API_KEY=your_api_key
-    CLOUDINARY_API_SECRET=your_api_secret
     RESEND_API_KEY=your_resend_api_key
+    EMAIL_FROM=your_sender_email_for_resend
+    EMAIL_FROM_NAME="ChatApp Team"
     CLIENT_URL=http://localhost:3000
+    FE_URL=your_frontend_deployment_url
+    CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+    CLOUDINARY_API_KEY=your_cloudinary_api_key
+    CLOUDINARY_API_SECRET=your_cloudinary_api_secret
     ```
 
 ### Running the Server

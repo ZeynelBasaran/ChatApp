@@ -14,7 +14,7 @@ function ContactList() {
   const { data:allContacts, isLoading, isError } = contactsQuery;
 
 
-
+  console.log("allContacts", allContacts);
 
 
   if (isLoading) return <UsersLoadingSkeleton />;

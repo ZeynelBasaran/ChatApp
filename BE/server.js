@@ -7,8 +7,7 @@ import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import cors from "cors";
 
-// Initialize express application
-const app = express();
+import { app, server } from "./src/lib/socket.js";
 
 // General API rate limiter (Max 100 requests per 1 minutes for each IP)
 const generalLimiter = rateLimit({
@@ -45,8 +44,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Middleware to parse JSON bodies
-app.use(express.json());
+// Middleware to parse JSON bodies with a higher limit for image uploads
+app.use(express.json({ limit: "10mb" }));
 
 // Middleware to parse cookies from headers
 app.use(cookieParser());
@@ -71,6 +70,6 @@ app.use("/api/message", generalLimiter, messageRoutes);
 connectDB();
 
 // Start the server and listen for incoming requests
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

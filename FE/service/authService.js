@@ -15,6 +15,7 @@ export const useAuthService = () => {
     queryFn: async () => {
       const { data } = await apiFactory.get("/auth/check");
       setAuthUser(data);
+      connectSocket();
       return data;
     },
     retry: false,

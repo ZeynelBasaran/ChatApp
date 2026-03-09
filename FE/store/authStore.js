@@ -13,7 +13,10 @@ export const useAuthStore = create((set, get) => ({
     const { authUser, socket } = get();
     if (!authUser || socket?.connected) return;
 
-    const newSocket = io(API_BASE_URL, {
+    const newSocket = io(API_BASE_URL.replace("/api", ""), {
+      query: {
+        userId: authUser._id,
+      },
       withCredentials: true,
     });
 

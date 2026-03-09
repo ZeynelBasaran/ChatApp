@@ -17,6 +17,15 @@ A modern, responsive frontend for the Real-time Chat Application, built with Nex
 *   **Internationalization:** next-intl
 *   **Theme:** next-themes (Dark/Light mode support)
 
+## ✨ Frontend Features
+
+*   **Optimistic UI Updates:** Instant message rendering utilizing `TanStack Query` mutations.
+*   **Global State Management:** Chat state and authentication controlled via `Zustand`.
+*   **Form Validation:** Built-in safe schema parsing using `React Hook Form` and `Zod`.
+*   **i18n Support:** Easily switch between languages through `next-intl`.
+*   **Beautiful UI Components:** Pre-built, customizable UI using `Tailwind CSS v4` and `DaisyUI 5`.
+*   **Toast Notifications:** Interactive user feedback via `Sonner`.
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -39,7 +48,13 @@ A modern, responsive frontend for the Real-time Chat Application, built with Nex
 3.  Set up environment variables:
     Create a `.env.local` file in the `FE` directory and add:
     ```env
+    # Client-side (Browser)
     NEXT_PUBLIC_API_URL=http://localhost:5173/api
+
+    # Server-side (Node / Server Actions / Route Handlers)
+    API_URL=http://localhost:5173/api
+
+    NODE_ENV=development
     ```
 
 ### Running the Application
