@@ -128,11 +128,24 @@ function SignUpPage() {
           <div className="hidden md:w-1/2 md:flex items-center justify-center p-6 bg-color-secondary rounded-xl m-4">
             <div className="text-center">
 
-              <h3 className="text-xl font-medium text-color-primary mt-6">
+              <h3 className="text-xl font-medium text-color-primary mb-6">
                 {t('startJourney')}
               </h3>
 
-              <Image src={"/HeroImage.png"} alt="icon" width={500} height={500} className="w-[500px] h-[500px] rounded-full" />
+              <div className="relative inline-block mt-4">
+                {/* Background Glow Effects */}
+                <div className="absolute inset-0 bg-blue-500/30 blur-[80px] scale-110 -z-10 animate-pulse"></div>
+                <div className="absolute inset-0 bg-purple-500/20 blur-[80px] translate-x-10 translate-y-10 -z-10"></div>
+
+                <Image
+                  src={"/HeroImage.png"}
+                  alt="Hero Image"
+                  width={500}
+                  height={500}
+                  className="w-[450px] h-[450px] object-contain relative z-10 drop-shadow-2xl"
+                  priority
+                />
+              </div>
 
             </div>
           </div>

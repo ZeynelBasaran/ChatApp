@@ -9,7 +9,7 @@ export const useAuthService = () => {
   const { connectSocket, disconnectSocket, setAuthUser } = useAuthStore();
   const router = useRouter();
 
-  // 1. Auth Kontrolü
+  // 1. Auth Check
   const authQuery = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
@@ -48,7 +48,6 @@ export const useAuthService = () => {
   const loginMutation = useMutation({
     mutationFn: async (data) => {
       const res = await apiFactory.post("/auth/login", data);
-      console.log("login res", res.data)
       return res.data;
     },
 
@@ -56,7 +55,7 @@ export const useAuthService = () => {
       queryClient.setQueryData(["authUser"], data);
       connectSocket(data);
 
-      // Backend cookie'sini (jwt) Netlify/Next.js göremediği için yardımcı cookie:
+      // Helper cookie because Netlify/Next.js cannot see backend cookie (jwt):
       document.cookie = "auth_indicator=true; path=/; max-age=604800"; // 7 days
 
       toast.success("Login successful", {
@@ -67,7 +66,7 @@ export const useAuthService = () => {
     },
 
     onError: (error) => {
-      toast.error("Login failed", console.log("hata", error), {
+      toast.error("Login failed", {
         description:
           error.response?.data?.message ||
           error.message ||
@@ -76,26 +75,26 @@ export const useAuthService = () => {
     },
   });
 
-  // 4. Logout Mutasyonu
+  // 4. Logout Mutation
   const logoutMutation = useMutation({
     mutationFn: () => apiFactory.post("/auth/logout"),
     onSuccess: () => {
       queryClient.setQueryData(["authUser"], null);
       disconnectSocket();
 
-      // Kullanıcı çıkış yaptığında yardımcı cookie'yi de sil
+      // Delete helper cookie when user logs out
       document.cookie = "auth_indicator=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
-      toast.success("Çıkış yapıldı", {
-        description: "Tekrar görüşmek üzere!",
+      toast.success("Logged out successfully", {
+        description: "Hope to see you again!",
       });
 
       setAuthUser(null);
 
-      router.refresh(); // Server component'leri tetikle
+      router.refresh(); // Trigger server components
     },
     onError: () => {
-      toast.error("Çıkış yapılırken bir hata oluştu.");
+      toast.error("An error occurred during logout.");
     },
   });
 

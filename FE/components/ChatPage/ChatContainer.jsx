@@ -18,8 +18,8 @@ function ChatContainer() {
 
     const { data: fetchedMessages, isLoading: isMessagesLoading } = messagesQuery;
 
-    // Seçili kullanıcı değiştiğinde messagesQuery'den gelen veriyi Zustand store'una eşitleyelim.
-    // Aynı zamanda yeni kullanıcı seçildiğinde eski mesajları temizleyelim.
+    // Sync data from messagesQuery to Zustand store when selected user changes.
+    // Also clear old messages when a new user is selected.
     useEffect(() => {
         if (fetchedMessages) {
             setMessages(fetchedMessages);
@@ -27,15 +27,15 @@ function ChatContainer() {
     }, [fetchedMessages, setMessages]);
 
     useEffect(() => {
-        // Kullanıcı değiştiğinde veya yeni fetch başladığında (undefined ise) store'u boşalt
+        // Clear store when user changes or new fetch starts (if undefined)
         if (selectedUser?._id && !fetchedMessages && isMessagesLoading) {
             setMessages([]);
         }
     }, [selectedUser?._id, isMessagesLoading, fetchedMessages, setMessages]);
 
     useEffect(() => {
-        // Socket dinleyicisini seçili kullanıcı değiştiğinde yenileyelim ki
-        // store'daki son selectedUser referansını yakalasın
+        // Refresh the socket listener when the selected user changes so
+        // it captures the latest selectedUser reference from the store
         if (socket) {
             subscribeToMessages(socket);
         }
@@ -65,9 +65,9 @@ function ChatContainer() {
                                 className={`chat ${msg.senderId === authUser?._id ? "chat-end" : "chat-start"}`}
                             >
                                 <div
-                                    className={`chat-bubble relative ${msg.senderId === authUser?._id
+                                    className={`chat-bubble relative shadow-sm ${msg.senderId === authUser?._id
                                         ? "bg-cyan-600 text-white"
-                                        : "bg-slate-800 text-slate-200"
+                                        : "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200"
                                         }`}
                                 >
                                     {msg.image && (

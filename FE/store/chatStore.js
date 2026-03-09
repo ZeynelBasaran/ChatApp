@@ -1,19 +1,19 @@
 import { create } from "zustand";
 
-// Next.js SSR sırasında window nesnesi tanımlı olmadığı için hata almamak adına
+// To prevent errors during Next.js SSR where the window object is not defined
 const getInitialSoundState = () => {
     if (typeof window !== "undefined") {
         const val = localStorage.getItem("isSoundEnabled");
         if (val !== null) return JSON.parse(val) === true;
     }
-    return true; // Varsayılan değer
+    return true; // Default value
 };
 
 export const useChatStore = create((set, get) => ({
     activeTab: "chats",
     selectedUser: null,
     isSoundEnabled: getInitialSoundState(),
-    messages: [], // Mesajları socket işlemleri ve optimistic UI için burada tutuyoruz,
+    messages: [], // Keeping messages here for socket operations and optimistic UI
     chats: [],
 
 
@@ -36,13 +36,13 @@ export const useChatStore = create((set, get) => ({
     subscribeToMessages: (socket) => {
         if (!socket) return;
 
-        // Önce aynı event dinleniyorsa temizle (çoklu render sorunları için)
+        // First clear if the same event is being listened to (for multiple render issues)
         socket.off("newMessage");
 
         socket.on("newMessage", (newMessage) => {
             const { selectedUser, isSoundEnabled, addMessage } = get();
 
-            // Mesaj seçili olandan mı geldi?
+            // Did the message come from the selected user?
             if (!selectedUser) return;
             const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
             if (!isMessageSentFromSelectedUser) return;
@@ -52,7 +52,7 @@ export const useChatStore = create((set, get) => ({
             if (isSoundEnabled) {
                 const notificationSound = new Audio("/sounds/notification.mp3");
                 notificationSound.currentTime = 0;
-                notificationSound.play().catch((e) => console.log("Audio play failed:", e));
+                notificationSound.play().catch(() => { });
             }
         });
     },

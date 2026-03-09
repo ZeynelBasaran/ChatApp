@@ -64,13 +64,12 @@ export const signup = async (req, res) => {
           ENV.CLIENT_URL,
         );
       } catch (error) {
-        console.error("Failed to send welcome email:", error);
+        // Silently handle email error
       }
     } else {
       res.status(400).json({ message: "Invalid User Data" });
     }
   } catch (error) {
-    console.log("Error in sign up controller ", error);
     res.status(500).json("Interval server error ");
   }
 };
@@ -100,7 +99,6 @@ export const login = async (req, res) => {
       profilePic: user.profilePic,
     });
   } catch (error) {
-    console.error("Error in login controller:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -116,7 +114,6 @@ export const logout = (_, res) => {
     });
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
-    console.error("Error in logout controller:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -139,7 +136,6 @@ export const updateProfile = async (req, res) => {
 
     res.status(200).json(updatedUser);
   } catch (error) {
-    console.log("Error in update profile:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

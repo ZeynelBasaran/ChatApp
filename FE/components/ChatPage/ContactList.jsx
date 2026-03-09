@@ -7,14 +7,13 @@ import { useAuthStore } from "../../store/authStore";
 import { useChatService } from "../../service/chatService";
 
 function ContactList() {
-  const {  setSelectedUser,  } = useChatStore();
+  const { setSelectedUser, } = useChatStore();
   const { onlineUsers } = useAuthStore();
 
   const { contactsQuery } = useChatService();
-  const { data:allContacts, isLoading, isError } = contactsQuery;
+  const { data: allContacts, isLoading, isError } = contactsQuery;
 
 
-  console.log("allContacts", allContacts);
 
 
   if (isLoading) return <UsersLoadingSkeleton />;
@@ -33,7 +32,7 @@ function ContactList() {
                 <img src={contact.profilePic || "/avatar.png"} />
               </div>
             </div>
-            <h4 className="text-slate-200 font-medium">{contact.fullName}</h4>
+            <h4 className="text-slate-800 dark:text-slate-200 font-medium">{contact.fullName}</h4>
           </div>
         </div>
       ))}

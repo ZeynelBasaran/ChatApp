@@ -14,11 +14,10 @@ export const useChatService = () => {
         queryKey: ["contacts"],
         queryFn: async () => {
             const { data } = await apiFactory.get("/message/contacts");
-            console.log("contactsQuery", data);
             return data;
         },
         onError: (error) => {
-            toast.error(error.response?.data?.message || "Kişiler yüklenemedi");
+            toast.error(error.response?.data?.message || "Could not load contacts");
         },
     });
 
@@ -30,11 +29,10 @@ export const useChatService = () => {
             return data;
         },
         onError: (error) => {
-            toast.error(error.response?.data?.message || "Sohbetler yüklenemedi");
+            toast.error(error.response?.data?.message || "Could not load chats");
         },
     });
 
-    // 3. Get Messages by User ID
     // 3. Get Messages by User ID
     const messagesQuery = useQuery({
         queryKey: ["messages", selectedUser?._id],
@@ -43,7 +41,7 @@ export const useChatService = () => {
             const { data } = await apiFactory.get(`/message/${selectedUser._id}`);
             return data;
         },
-        enabled: !!selectedUser?._id, // Seçili kullanıcı yoksa istek atma
+        enabled: !!selectedUser?._id, // Don't fetch if no user selected
     });
 
     // 4. Send Message Mutation
@@ -51,7 +49,7 @@ export const useChatService = () => {
         mutationFn: async (messageData) => {
             const tempId = `temp-${Date.now()}`;
 
-            // Optimistic Message (UI'ı hemen güncellemek için)
+            // Optimistic Message (to update UI immediately)
             const optimisticMessage = {
                 _id: tempId,
                 senderId: authUser?._id,
@@ -62,31 +60,31 @@ export const useChatService = () => {
                 isOptimistic: true, // Optimistic flag (optional indicator)
             };
 
-            // Beklemeden mesajı listeye ekle
+            // Add message to list without waiting
             addMessage(optimisticMessage);
 
-            // Gerçekleştirilecek olan POST isteği
+            // The actual POST request to execute
             const { data } = await apiFactory.post(`/message/send/${selectedUser._id}`, messageData);
 
             return { apiData: data, tempId };
         },
         onSuccess: ({ apiData, tempId }) => {
-            // Optimizm (temp) ile gelen mesajı listeden çıkarıp gerçek DB halini ekliyoruz.
-            // (React-Query query state yerine durum Zustand store üzerinde yönetildiğinden)
+            // We remove the optimistic (temp) message and add the real DB version.
+            // (Because state is managed in Zustand store instead of React-Query query state)
             const currentMessages = useChatStore.getState().messages;
             const updatedMessages = currentMessages
-                .filter((m) => m._id !== tempId) // Fake tempId silindi
-                .concat(apiData); // Gerçek response datası eklendi
+                .filter((m) => m._id !== tempId) // Removed fake tempId
+                .concat(apiData); // Added real response data
 
             setMessages(updatedMessages);
 
-            // Ana sohbetler listesini arka planda sessizce yenileyebiliriz (örn. preview için)
+            // We can silently refresh the main chat list in the background (e.g. for preview)
             queryClient.invalidateQueries({ queryKey: ["chats"] });
         },
         onError: (error) => {
-            // Hata olursa geçici mesajı temizlemek için mesajları tekrar çektir.
+            // If an error occurs, refetch messages to clear the temporary message.
             queryClient.invalidateQueries({ queryKey: ["messages", selectedUser?._id] });
-            toast.error(error.response?.data?.message || "Mesaj gönderilirken hata oluştu");
+            toast.error(error.response?.data?.message || "Error sending message");
         },
     });
 

@@ -50,18 +50,18 @@ function MessageInput() {
   };
 
   return (
-    <div className="p-4 border-t border-slate-700/50">
+    <div className="p-4 border-t border-gray-200 dark:border-slate-700/50">
       {imagePreview && (
         <div className="max-w-3xl mx-auto mb-3 flex items-center">
           <div className="relative">
             <img
               src={imagePreview}
               alt="Preview"
-              className="w-20 h-20 object-cover rounded-lg border border-slate-700"
+              className="w-20 h-20 object-cover rounded-lg border border-gray-200 dark:border-slate-700"
             />
             <button
               onClick={removeImage}
-              className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-slate-200 hover:bg-slate-700"
+              className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gray-200 dark:bg-slate-800 flex items-center justify-center text-slate-800 dark:text-slate-200 hover:bg-gray-300 dark:hover:bg-slate-700"
               type="button"
             >
               <XIcon className="w-4 h-4" />
@@ -78,7 +78,7 @@ function MessageInput() {
             setText(e.target.value);
             isSoundEnabled && playRandomKeyStrokeSound();
           }}
-          className="flex-1 bg-slate-800/50 border border-slate-700/50 rounded-lg py-2 px-4"
+          className="flex-1 bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700/50 text-slate-800 dark:text-white rounded-lg py-2 px-4 focus:outline-none focus:ring-1 focus:ring-cyan-500"
           placeholder="Type your message..."
         />
 
@@ -93,7 +93,7 @@ function MessageInput() {
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className={`bg-slate-800/50 text-slate-400 hover:text-slate-200 rounded-lg px-4 transition-colors ${imagePreview ? "text-cyan-500" : ""
+          className={`bg-gray-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 rounded-lg px-4 transition-colors ${imagePreview ? "text-cyan-500" : ""
             }`}
         >
           <ImageIcon className="w-5 h-5" />

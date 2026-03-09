@@ -25,7 +25,7 @@ function ProfileHeader() {
         reader.onloadend = () => {
             const base64Image = reader.result;
             setSelectedImg(base64Image);
-            // react-query mutation kullanarak update yap
+            // update using react-query mutation
             if (updateProfileMutation) {
                 updateProfileMutation.mutate({ profilePic: base64Image });
             }
@@ -33,7 +33,7 @@ function ProfileHeader() {
     };
 
     return (
-        <div className="p-6 border-b border-slate-700/50">
+        <div className="p-6 border-b border-gray-200 dark:border-slate-700/50">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     {/* AVATAR */}
@@ -63,7 +63,7 @@ function ProfileHeader() {
 
                     {/* USERNAME & ONLINE TEXT */}
                     <div>
-                        <h3 className="text-slate-200 font-medium text-base max-w-[180px] truncate">
+                        <h3 className="text-slate-800 dark:text-slate-200 font-medium text-base max-w-[180px] truncate">
                             {authUser?.fullName || "Loading..."}
                         </h3>
 
@@ -75,7 +75,7 @@ function ProfileHeader() {
                 <div className="flex gap-4 items-center">
                     {/* LOGOUT BTN */}
                     <button
-                        className="text-slate-400 hover:text-slate-200 transition-colors"
+                        className="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
                         onClick={() => logoutMutation?.mutate()}
                     >
                         <LogOutIcon className="size-5" />
@@ -83,11 +83,11 @@ function ProfileHeader() {
 
                     {/* SOUND TOGGLE BTN */}
                     <button
-                        className="text-slate-400 hover:text-slate-200 transition-colors"
+                        className="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
                         onClick={() => {
                             // play click sound before toggling
                             const clickSound = new Audio("/sounds/mouse-click.mp3");
-                            clickSound.play().catch((error) => console.log("Audio play failed:", error));
+                            clickSound.play().catch(() => { });
                             toggleSound();
                         }}
                     >

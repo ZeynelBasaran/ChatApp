@@ -6,21 +6,17 @@ import { useQueryClient } from "@tanstack/react-query";
 
 /**
  * FooterLinks — Client Component
- * İki kaynaktan auth kontrolü yapar:
- * 1. isAuthServer: Server side cookie kontrolü (SSR anında doğru bilgi)
- * 2. authStore / authQuery: Client side, SPA geçişlerinde gerçek zamanlı güncellenir
+ * Checks auth from two sources:
+ * 1. isAuthServer: Server side cookie check (accurate info during SSR)
+ * 2. authStore / authQuery: Client side, updates in real-time during SPA transitions
  */
 export default function FooterLinks({ isAuthServer, signUpLabel, loginLabel, linksLabel }) {
     const { authUser } = useAuthStore();
-    // useQueryClient: yeni istek açmadan mevcut React Query cache'ini okur
+    // useQueryClient: reads existing React Query cache without making a new request
     const queryClient = useQueryClient();
     const cachedUser = queryClient.getQueryData(["authUser"]);
 
     const isAuth = isAuthServer || !!authUser || !!cachedUser;
-
-
-    console.log("AuthUser", authUser);
-    console.log("isAuth", isAuth);
 
     if (isAuth) return null;
 

@@ -14,8 +14,8 @@ function ChatsList() {
   const { onlineUsers } = useAuthStore();
   const { chatsQuery } = useChatService();
 
-  const { data:chats, isLoading, isError } = chatsQuery;
-  
+  const { data: chats, isLoading, isError } = chatsQuery;
+
 
   if (isLoading) return <UsersLoadingSkeleton />;
   if (chats === undefined || chats.length === 0) return <NotChatFound />;
@@ -35,7 +35,7 @@ function ChatsList() {
                 <img src={chat.profilePic || "/avatar.png"} alt={chat.fullName} />
               </div>
             </div>
-            <h4 className="text-slate-200 font-medium truncate">{chat.fullName}</h4>
+            <h4 className="text-slate-800 dark:text-slate-200 font-medium truncate">{chat.fullName}</h4>
           </div>
         </div>
       ))}
