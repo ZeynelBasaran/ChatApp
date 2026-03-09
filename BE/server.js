@@ -35,6 +35,7 @@ app.set("trust proxy", 1);
 const allowedOrigins = [
   "http://localhost:3000",
   "https://chatappzb.netlify.app",
+  "https://chat-app-lac-two-42.vercel.app",
 ];
 
 const corsOptions = {
